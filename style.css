@@ -1,0 +1,212 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.mainHeader {
+    width: 100%;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+}
+
+.mainHeader #topHeader {
+    background-color: #1D7E67;
+    height: 8vh;
+    width: 100%;
+    display: flex;
+}
+
+.mainHeader #topHeader #details {
+    width: 20vw;
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 17px 0px 0px 10px;
+    align-items: end;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.mainHeader #topHeader #details .detailBox {
+    color: white;
+    height: 80%;
+    width: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mainHeader #topHeader #details .active {
+    background-color: #E7ECEE;
+    color: #1D7E67;
+}
+
+.mainHeader #downHeader {
+    background-color: #E7ECEE;
+    height: 12vh;
+}
+
+.mainHeader #downHeader #headerIcons {
+    height: 7vh;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.mainHeader #downHeader #headerIcons select {
+    height: 55%;
+    border: none;
+}
+
+.mainHeader #downHeader #headerIcons span {
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.mainHeader #downHeader #headerIcons label {
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.mainHeader #downHeader #headerIcons .hidden-input {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.mainHeader #downHeader #headerIcons input:checked+label {
+    border: 2px solid gray;
+    background-color: #c7cacb;
+}
+
+
+.mainHeader #downHeader #headerIcons .activeCheck:hover {
+    background-color: #DAE0E2;
+}
+
+.mainHeader #downHeader #headerInfo {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.mainHeader #downHeader #headerInfo #cellInfo {
+    background-color: white;
+    width: 5vw;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainHeader #downHeader #headerInfo #fx {
+    font-size: 1.5rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.mainHeader #downHeader #headerInfo #formulaBox {
+    width: 90%;
+    height: 4vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+
+/*/////////////// header is ended here ///////////////*/
+
+#root-container {
+    overflow: scroll;
+    background-color: #E7ECEE;
+    position: relative;
+    display: block;
+}
+
+#root-container .header {
+    display: flex;
+    position: sticky;
+    top: 0px;
+    background-color: #E7ECEE;
+    z-index: 90;
+    width: fit-content;
+}
+
+#root-container .header .header-cell {
+    width: 6vw;
+    height: 3.5vh;
+    border: 2px solid #DAE0E2;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    z-index: 20;
+    background-color: #E7ECEE;
+    padding: 2px;
+}
+
+#root-container .header .header-cell:nth-child(1) {
+    width: 2.7vw;
+    left: 0px;
+    top: 0;
+    position: sticky;
+    background-color: #E7ECEE;
+    font-weight: 700;
+    font-size: 1rem;
+    z-index: 90;
+}
+
+#root-container .body {
+    display: flex;
+    width: fit-content;
+}
+
+#root-container .body .sno {
+    position: sticky;
+    left: 0px;
+    top: 0px;
+    width: 2.8vw;
+    z-index: 20;
+    font-weight: 700;
+}
+
+#root-container .body .sno .sno-cells {
+    border: 2px solid #DAE0E2;
+    width: 2.7vw;
+    height: 3.5vh;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    z-index: 20;
+    background-color: #E7ECEE;
+    padding: 2px;
+}
+
+#root-container .body .main .row {
+    display: flex;
+}
+
+#root-container .body .main {
+    margin-left: 5.5px;
+    position: relative;
+}
+
+#root-container .body .main .row .main-cell {
+    width: 6vw;
+    height: 3.5vh;
+    border: 2px solid #DAE0E2;
+    align-items: last baseline;
+    display: flex;
+    justify-content: left;
+    padding: 2px;
+}
+
+#root-container .body .main .row .main-cell:focus {
+    border: 2px solid blue;
+    outline: blue;
+}
