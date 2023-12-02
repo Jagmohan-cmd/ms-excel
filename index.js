@@ -1,7 +1,7 @@
 const column = 26;
 const row = 100;
 
-const headerContainer = document.querySelector(".header");
+const headerContainer = document.querySelector("#header");
 const serialNumberContainer = document.querySelector(".sno");
 const mainContainer = document.querySelector(".main");
 
@@ -44,7 +44,7 @@ function createRow(rowNumber){
         // add cell ID into the cellInfo div
         cell.addEventListener("focus" , onCellFocus);
 
-        cell.addEventListener("input" , onFormChange);
+        cell.addEventListener("input" , onChangeFormText);
         
     }
     mainContainer.appendChild(row);

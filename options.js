@@ -16,17 +16,93 @@ const defaultProperties = {
     isBold : false,
     isItalic : false,
     isUnderline : false,
-    value : ""
+    text : ""
+}
+
+
+function applyStylesToCell(styleObject){
+
+    if(!activeElement){
+        alert("please select a cell to make chamges");
+        form.reset();
+        return;
+    }
+
+    // it will take the style object and applies it to the currently selected cell.
+    let activeCell = document.getElementById(activeElement);
+
+    activeCell.style.fontSize = `${styleObject.fontSize}px`; 
+    activeCell.style.fontFamily = styleObject.fontFamily;
+    activeCell.style.color = styleObject.textColor;
+    activeCell.style.backgroundColor = styleObject.backgroundColor;
+    activeCell.style.justifyContent = styleObject.textAlign;
+
+    if(styleObject.isBold){
+        activeCell.style.fontWeight = "bold";
+    }
+    else{
+        activeCell.style.fontWeight = "normal";
+    }
+
+    if(styleObject.isItalic){
+        activeCell.style.fontStyle = "italic";
+    }
+    else{
+        activeCell.style.fontStyle = "normal";
+    }
+
+    if(styleObject.isUnderline){ 
+        activeCell.style.textDecoration = "underline";
+    }
+    else{
+        activeCell.style.textDecoration = "none";
+    }
+    // console.log(applyStylesToCell());
+    state[activeElement] = styleObject;
+
+}
+
+
+
+function onFormChange(){
+   
+    let currentState = {
+        textColor : form.textColor.value,
+        backgroundColor : form.bgColor.value,
+        fontSize : form.fontSize.value,
+        fontFamily : form.fontFamily.value,
+        isBold : form.bolt.checked,
+        isItalic : form.italic.checked,
+        isUnderline : form.underline.checked,
+        textAlign : form.alignText.value
+    };
+
+    // below function applies all the styles to the active cell.
+    applyStylesToCell(currentState);
+
+    state[activeElement] = {...currentState , text : activeElement.innerText};
+}
+
+function onChangeFormText(event){
+    let changedText = event.target.innerText;
+    if(state[activeElement]){
+        state[activeElement].text = changedText;
+    }
+    else{
+        // update the state object for the current cell.
+        state[activeElement] = {...defaultProperties , text : activeElement.innerText};
+
+    }
 }
 
 function onCellFocus(e){
     const elementId =  e.target.id;
     cellNamePlaceholder.innerText = elementId;
-    activeElement = e.target;
-    if(state[elementId]){
+    activeElement = elementId;
+    if(state[activeElement]){
         // already selected cell
         // fill the options with the state of that cell
-        resetOptions(state[elementId]);
+        resetOptions(state[activeElement]);
     }
     else{
         // selected for the first time
@@ -46,53 +122,17 @@ function resetOptions(optionsState){
     form.textColor.value = optionsState.color;
     form.bgColor.value = optionsState.backgroundColor;
 }
+
+
  
+function exportData() {
+    const jsonData = JSON.stringify(state);
+    const blob = new Blob([jsonData] , {type: "text/plain"});
 
-function onFormChange(){
-    if(!activeElement){
-        alert("please select a cell to make chamges");
-        form.reset();
-        return;
-    }
-
-    let currentState = {
-        textColor : form.textColor.value,
-        backgroundColor : form.bgColor.value,
-        fontSize : form.fontSize.value,
-        fontFamily : form.fontFamily.value,
-        isBold : form.bolt.checked,
-        isItalic : form.italic.checked,
-        isUnderline : form.underline.checked,
-        textAlign : form.alignText.value
-    }
-
-    // below function applies all the styles to the active cell.
-    applyStylesToCell(currentState);
-
-    // update the state object for the current cell.
-    state[activeElement.id] = {...currentState , value : activeElement.innerText};
-
-}
-
-function applyStylesToCell(styleObject){
-    // it will take the style object and applies it to the currently selected cell.
-
-    activeElement.style.fontSize = `${styleObject.fontSize}px`;
-    activeElement.style.fontFamily = styleObject.fontFamily;
-    activeElement.style.color = styleObject.textColor;
-    activeElement.style.backgroundColor = styleObject.backgroundColor;
-    activeElement.style.justifyContent = styleObject.textAlign;
-
-    if(styleObject.isBold){
-        activeElement.style.fontWeight = "bold";
-    }
-
-    if(styleObject.isItalic){
-        activeElement.style.fontStyle = "italic";
-    }
-
-    if(styleObject.isUnderline){
-        activeElement.style.textDecoration = "underline";
-    }
-
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "data.json";
+    link.href = url;
+    link.click();
+    console.log(jsonData);
 }
